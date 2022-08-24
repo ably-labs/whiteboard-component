@@ -4,20 +4,22 @@ AblyDraw; // Force to load and register component.
 
 console.log("Oh hai! 🖤");
 
-// This exists to support debug mode in this example
-// You should use the get-token-url attribute in real apps 
-// The error here is wrong, this is a vite feature to support .env files
-const apiKey = import.meta.env.VITE_ABLY_API_KEY;
+const drawElement = <AblyDraw>document.getElementsByTagName("ably-draw")[0];    
+const cursorElement = <AblyCursor>document.getElementsByTagName("ably-cursor")[0];
+const friendlyName = generateName(2, "-");
 
-if (apiKey) {    
-    console.log("Setting Ably API Key...", apiKey);
-    
-    const drawElement = <AblyDraw>document.getElementsByTagName("ably-draw")[0];    
-    const cursorElement = <AblyCursor>document.getElementsByTagName("ably-cursor")[0];  
-    
-    const friendlyName = generateName(2, "-");
-    drawElement.setAttribute("api-key", apiKey);
-    cursorElement.setAttribute("api-key", apiKey);
+cursorElement.setAttribute("client-name", friendlyName);
+
+if (import.meta.env.DEV) {    
+    console.log("Demo running in dev, Setting Ably API Key from ./src/.env"); 
+
+    drawElement.setAttribute("api-key", import.meta.env.VITE_ABLY_API_KEY);
+    cursorElement.setAttribute("api-key", import.meta.env.VITE_ABLY_API_KEY);
+} else {
+    console.log("Demo running on production host");
+
+    drawElement.setAttribute("get-token-url", `/api/ably-token-request?clientId=${friendlyName}`);
+    cursorElement.setAttribute("get-token-url", `/api/ably-token-request?clientId=${friendlyName}`);
     cursorElement.setAttribute("client-name", friendlyName);
 }
 
