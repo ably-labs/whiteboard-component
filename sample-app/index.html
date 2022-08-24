@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ably Whiteboard Component Demo</title>
+    <script src="./script.ts" type="module"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h1>Ably Whiteboard Component Demo</h1>
+    <ably-cursor     
+        DISABLED-api-key="you-can-put-your-key-here-but-please-dont" 
+        DISABLED-get-token-url="https://ppwcfol4k7.execute-api.us-east-2.amazonaws.com/default/createTokenRequest"
+        channel="drawing"
+    ></ably-cursor>
+        
+    <ably-draw 
+        DISABLED-api-key="you-can-put-your-key-here-but-please-dont" 
+        DISABLED-get-token-url="https://ppwcfol4k7.execute-api.us-east-2.amazonaws.com/default/createTokenRequest"
+        channel="drawing"
+    ></ably-draw>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+{
+  "name": "package-name-here",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "npx vite serve",
+    "dev": "npx vite serve",
+    "test": "vitest run",
+    "build": "tsc"
+  },
+  "author": "Author",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4",
+    "vitest": "^0.18.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "keywords here"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/path/repo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/path/repo/issues"
+  },
+  "homepage": "https://github.com/path/repo#readme",
+  "wallaby": {
+    "testFramework": "vitest",
+    "env": {
+      "params": {
+        "runner": "--experimental-vm-modules"
+      }
+    }
+  },
+  "dependencies": {
+    "@snakemode/snake-canvas": "^1.0.30",
+    "ably": "^1.2.29"
+  }
+}
