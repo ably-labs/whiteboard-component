@@ -1,5 +1,5 @@
 {
-  "name": "whiteboard-component",
+  "name": "ably-whiteboard-component",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -8,7 +8,9 @@
     "start": "npx vite serve",
     "dev": "npx vite serve",
     "test": "vitest run",
-    "build": "tsc"
+    "build": "tsc",  
+    "start:netlify": "netlify dev -c \"npm run dev\" --targetPort 8080",  
+    "build:netlify": "npx vite build && cd api && npm i && npm run build"
   },
   "author": "Author",
   "license": "ISC",
@@ -42,5 +44,8 @@
   "dependencies": {
     "@snakemode/snake-canvas": "^1.0.30",
     "ably": "^1.2.29"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
