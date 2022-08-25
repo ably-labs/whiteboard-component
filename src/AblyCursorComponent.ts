@@ -29,13 +29,26 @@ export class AblyCursor extends HTMLElement {
         this.cursors.style.height = "100%";
         this.cursors.style.zIndex = "1000";
         this.cursors.style.pointerEvents = "none";
-        this.cursors.style.touchAction = "none"
 
         shadow.appendChild(this.cursors);
 
         document.body.onmousemove = (e) => {
             this.sendCursorLocation(e.clientX, e.clientY)
         }
+
+        document.body.addEventListener("touchstart", (e) => {
+            const touch = e.targetTouches[0];
+            const x = touch.clientX - 10;
+            const y = touch.clientY - 10;
+            this.sendCursorLocation(x, y);
+        }, false);
+
+        document.body.addEventListener("touchmove", (e) => {
+            const touch = e.targetTouches[0];
+            const x = touch.clientX - 10;
+            const y = touch.clientY - 10;
+            this.sendCursorLocation(x, y);
+        }, false);
     }
 
     public async connectedCallback() {

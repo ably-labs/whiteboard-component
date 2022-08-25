@@ -42,7 +42,7 @@
     }
   },
   "dependencies": {
-    "@snakemode/snake-canvas": "^1.0.30",
+    "@snakemode/snake-canvas": "^1.0.31",
     "ably": "^1.2.29"
   },
   "engines": {

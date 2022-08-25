@@ -16,8 +16,8 @@ export class AblyDraw extends HTMLElement {
 
     constructor() {
         super();
-        
-        const shadow = this.attachShadow({mode: 'open'});
+
+        const shadow = this.attachShadow({ mode: 'open' });
 
 
         const canvasElement = document.createElement('canvas');
@@ -27,13 +27,13 @@ export class AblyDraw extends HTMLElement {
             display: "flex",
             justifyContent: "center"
         }
-        
+
         palette.appendChild(this.createPaletteItem("black"));
         palette.appendChild(this.createPaletteItem("green"));
         palette.appendChild(this.createPaletteItem("blue"));
         palette.appendChild(this.createPaletteItem("red"));
         palette.appendChild(this.createPaletteItem("white", 15));
-        
+
         shadow.appendChild(canvasElement);
         shadow.appendChild(palette);
         Object.assign(palette.style, paletteStyle);
@@ -42,7 +42,6 @@ export class AblyDraw extends HTMLElement {
 
         this.canvas = new DrawableCanvasElement(canvasElement);
         this.canvas.registerPaletteElements(palette);
-        console.log(window.outerWidth -30 , window.innerWidth)
         this.canvas.setSize(window.innerWidth - 40, window.innerHeight - 120);
     }
 
@@ -70,10 +69,10 @@ export class AblyDraw extends HTMLElement {
 
         return paint;
     }
-    
+
     public async connectedCallback() {
         const clientId = generateUniqueId();
-        
+
         let ablyConfig: Ably.Types.ClientOptions;
         if (this.apiKey) {
             ablyConfig = { key: this.apiKey, clientId };
@@ -81,15 +80,15 @@ export class AblyDraw extends HTMLElement {
             ablyConfig = { authUrl: this.getTokenUrl, clientId };
         } else {
             ablyConfig = null;
-        }    
+        }
 
         if (!ablyConfig) {
             return;
         }
-        
+
         this.ably = new Ably.Realtime(ablyConfig);
         const channelName = await this.getAttribute("channel");
-        
+
         this.channel = this.ably.channels.get(channelName);
 
         this.channel.subscribe((message) => {
@@ -104,18 +103,18 @@ export class AblyDraw extends HTMLElement {
 
         console.log("Subscribed to channel", channelName);
     }
-    
+
     public async disconnectedCallback() {
-        if(!this.channel) {
+        if (!this.channel) {
             return;
         }
 
-        this.channel.unsubscribe(); 
+        this.channel.unsubscribe();
         this.channel.detach();
     }
 
     public async attributeChangedCallback(name, oldValue, newValue) {
-        this.disconnectedCallback();       
+        this.disconnectedCallback();
         this.connectedCallback();
     }
 }
