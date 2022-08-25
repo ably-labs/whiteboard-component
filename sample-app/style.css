@@ -1,8 +1,13 @@
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
   background-color: #dcf8ffe5;
   cursor: none;
+}
+
+h1 {
+  margin: 0;
+  padding: .5rem;
+  font-size: clamp(16px, 4vw, 40px) ;
 }

@@ -21,46 +21,54 @@ export class AblyDraw extends HTMLElement {
 
 
         const canvasElement = document.createElement('canvas');
-        const palette = document.createElement('ul');
+        const palette = document.createElement('div');
+
+        const paletteStyle: Partial<CSSStyleDeclaration> = {
+            display: "flex",
+            justifyContent: "center"
+        }
+        
         palette.appendChild(this.createPaletteItem("black"));
         palette.appendChild(this.createPaletteItem("green"));
         palette.appendChild(this.createPaletteItem("blue"));
         palette.appendChild(this.createPaletteItem("red"));
         palette.appendChild(this.createPaletteItem("white", 15));
-
+        
         shadow.appendChild(canvasElement);
         shadow.appendChild(palette);
+        Object.assign(palette.style, paletteStyle);
         canvasElement.style.backgroundColor = "white";
         canvasElement.style.border = "1px solid black";
 
         this.canvas = new DrawableCanvasElement(canvasElement);
         this.canvas.registerPaletteElements(palette);
-        this.canvas.setSize(1024, 720);
+        console.log(window.outerWidth -30 , window.innerWidth)
+        this.canvas.setSize(window.innerWidth - 100, window.innerHeight - 200);
     }
 
     private createPaletteItem(color: string, thickness: number = null) {
-        const li = document.createElement('li');
-        const palletteStyle: Partial<CSSStyleDeclaration> = {
-            display: "inline-block",
+        const paint = document.createElement('span');
+        const paintStyle: Partial<CSSStyleDeclaration> = {
+            display: "block",
             width: "50px",
             height: "50px",
-            margin: "0 20px",
+            margin: "0 10px",
             borderRadius: "50%",
             border: "1px solid black",
             color: "transparent",
             backgroundColor: color
         }
 
-        li.innerText = color;
-        li.setAttribute("data-color", color);
-        li.setAttribute("class", "palette-item");
-        Object.assign(li.style, palletteStyle)
+        paint.innerText = color;
+        paint.setAttribute("data-color", color);
+        paint.setAttribute("class", "palette-item");
+        Object.assign(paint.style, paintStyle)
 
         if (thickness) {
-            li.setAttribute("data-thickness", thickness.toString());
+            paint.setAttribute("data-thickness", thickness.toString());
         }
 
-        return li;
+        return paint;
     }
     
     public async connectedCallback() {
