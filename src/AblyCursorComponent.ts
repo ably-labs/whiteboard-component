@@ -29,6 +29,7 @@ export class AblyCursor extends HTMLElement {
         this.cursors.style.height = "100%";
         this.cursors.style.zIndex = "1000";
         this.cursors.style.pointerEvents = "none";
+        this.cursors.style.touchAction = "none"
 
         shadow.appendChild(this.cursors);
 
@@ -139,7 +140,7 @@ export class AblyCursor extends HTMLElement {
             top: `${coords.y}px`,
             left: `${coords.x}px`,
         }
-        
+
         const nameStyle: Partial<CSSStyleDeclaration> = {
             position: "absolute",
             top: "12px",
@@ -153,12 +154,12 @@ export class AblyCursor extends HTMLElement {
         const arrow = document.createElement("div");
         const name = document.createElement("div");
         name.innerText = clientId;
- 
+
         const element = document.createElement("div");
         element.id = `cursor-${clientId}`;
         element.appendChild(arrow)
         element.appendChild(name)
-        
+
         Object.assign(name.style, nameStyle)
         Object.assign(arrow.style, arrowStyle)
         Object.assign(element.style, cursorStyle);
