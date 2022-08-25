@@ -43,7 +43,7 @@ export class AblyDraw extends HTMLElement {
         this.canvas = new DrawableCanvasElement(canvasElement);
         this.canvas.registerPaletteElements(palette);
         console.log(window.outerWidth -30 , window.innerWidth)
-        this.canvas.setSize(window.innerWidth - 100, window.innerHeight - 200);
+        this.canvas.setSize(window.innerWidth - 40, window.innerHeight - 100);
     }
 
     private createPaletteItem(color: string, thickness: number = null) {
